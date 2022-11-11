@@ -25,19 +25,3 @@ User extends Person {
 Staff extends Person{
 
 }
-Database {
-	File file
-	ArrayList<String[]> data
-
-	writeToDatabase()
-	getRow()
-	getColumn()
-	getTable()
-}
-Driver {
-	ArrayList<Library>
-
-	loadData()
-	run()
-	saveData()
-}
