@@ -1,0 +1,26 @@
+// For multiple books, put copies of the book in arraylist or have a quantity in the data field of book.
+
+Library {
+	ArrayList<Book>
+
+	borrow(Library, Book) // borrow book from another library
+}
+Book {
+	int id
+	String name
+	String author
+	String topic
+}
+Loan {
+	Book
+	Date dateOfLoan
+}
+Person {
+	int id
+}
+User extends Person {
+	ArrayList<Loan>
+}
+Staff extends Person{
+
+}
