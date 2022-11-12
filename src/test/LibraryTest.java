@@ -1,4 +1,4 @@
-package org.example;
+package test;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.*;
@@ -11,12 +11,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/*import main.Book;
+import main.Book;
 import main.Department;
 import main.Library;
 import main.Loan;
 import main.Subscription;
-import main.User;*/
+import main.User;
 
 public class LibraryTest {
     /* 
@@ -28,7 +28,7 @@ public class LibraryTest {
      * relevant to more than one department.
      */
     @Test
-    @DisplayName("Unnecessary subscriptions test")
+    @DisplayName("Unnecessary Subscriptions Test")
     public void unnecessarySubTest() {
         Library UL = new Library();
         Library UCC = new Library();
@@ -52,7 +52,7 @@ public class LibraryTest {
      * could be borrowed from other universities with which UWON has an agreement
      */
     @Test
-    @DisplayName("University sharing books Test")
+    @DisplayName("University Sharing Books Test")
     public void shareBooksTest() {
         Library UL = new Library();
         Library UCC = new Library();
@@ -128,7 +128,7 @@ public class LibraryTest {
      * found at the appropriate place on the shelves.
      */
     @Test
-    @DisplayName("Card index test")
+    @DisplayName("Card Index Test")
     public void cardIndexTest() {
         Department CSIS = new Department();
         User john = new User();
@@ -141,10 +141,7 @@ public class LibraryTest {
         CSIS.returnLoan(book, LocalDate.now(), john);
         //book now available so it should assert true as john returned the loan.
         assertTrue(CSIS.loan(book, LocalDate.now().minusDays(15), milan));
-
     }
-
-
 }
 
     /* Bibliographical search restricted to library opening hours. Slow, tedious
