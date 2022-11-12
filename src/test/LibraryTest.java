@@ -25,11 +25,11 @@ public class LibraryTest {
 	 */
 
 	/* Unnecessary subscription by several departments to expensive journals that are
-	 * relevant to more than one department. 
+	 * relevant to more than one department.
 	 */
 
 	/* Acquisition of books or proceedings of marginal interest to the university, which
-	 * could be borrowed from other universities with which UWON has an agreement 
+	 * could be borrowed from other universities with which UWON has an agreement.
 	 */
 	@Test
 	@DisplayName("University sharing books Test")
@@ -37,15 +37,14 @@ public class LibraryTest {
 		Library UL = new Library();
 		Library UCC = new Library();
 
-		ArrayList<Book> books = new ArrayList<>(Arrays.asList(
-			new Book("Harry Potter and the Goblet of Fire", "J.K. Rowling", "Action"),
-			new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", "Comedy"),
-			new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling", "Fantasy")
-		));
+		Book book = new Book("Harry Potter and the Goblet of Fire", "J.K. Rowling", "Action");
+		ArrayList<Book> books = new ArrayList<>();
+		books.add(book);
 
-		UL.setBooks(books);
-		UL.agreement(UCC);
-		assertEquals(UL.getBooks(), UCC.getBooks());
+		UL.addBook(book);
+		UL.addAggreement(UCC);
+		UCC.borrowBook(UL, book);
+		assertEquals(books, UCC.getBooks());
 	}
 	
 	/* Subscription to journals of marginal interest to the university, which could be
@@ -66,7 +65,8 @@ public class LibraryTest {
 		Subscription sub = new Subscription("Netflix", books);
 
 		UL.addSub(sub);
-		UL.agreement(UCC);
+		UL.addAggreement(UCC);
+		UL.shareSub(UCC, sub);
 		assertEquals(UL.getSubs(), UCC.getSubs());
 	}
 
@@ -75,11 +75,11 @@ public class LibraryTest {
 	 * rules limiting loan periods, loss or stealing of book copies and so on. 
 	 */
 
-	/* Unavailability of journal issues while they are being bound into yearly volumes 
+	/* Unavailability of journal issues while they are being bound into yearly volumes.
 	 */
 
 	/* Lack of traceability to previous borrowers when books, proceedings or journal
-	 * volumes are found to be damaged 
+	 * volumes are found to be damaged.
 	 */
 	@Test
 	@DisplayName("Show History of Ownership Test")
@@ -113,7 +113,7 @@ public class LibraryTest {
 	 */
 	
 	/* Inaccurate search results, due to poor classification of books, journals or
-	 * proceedings within departments 
+	 * proceedings within departments.
 	 */
 
 	/* Incomplete or ineffective search results, due to relevant books, journals or

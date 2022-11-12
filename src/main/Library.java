@@ -5,21 +5,20 @@ import java.util.ArrayList;
 public class Library {
 	private ArrayList<Department> deps;
 	private ArrayList<Subscription> subs;
-	private ArrayList<Library> libraries;
 	private ArrayList<Book> books;
+	private ArrayList<Library> aggreements;
 
 
 	public Library() {
 		deps = new ArrayList<>();
 		subs = new ArrayList<>();
-		libraries = new ArrayList<>();
+		aggreements = new ArrayList<>();
 		books = new ArrayList<>();
 	}
 
 	public ArrayList<Book> getBooks() {
 		return books;
 	}
-
 	public void setBooks(ArrayList<Book> books) {
 		this.books = books;
 	}
@@ -27,25 +26,34 @@ public class Library {
 		books.add(book);
 	}
 
-	public ArrayList<Library> getLibraries() {
-		return libraries;
+	public ArrayList<Library> getAggreements() {
+		return aggreements;
 	}
-
-	public void setLibraries(ArrayList<Library> libraries) {
-		this.libraries = libraries;
+	public void setAggreements(ArrayList<Library> aggreements) {
+		this.aggreements = aggreements;
 	}
-	public void addLibrary(Library lib) {
-		libraries.add(lib);
+	public void addAggreement(Library lib) {
+		aggreements.add(lib);
+		lib.aggreements.add(this);
+	}
+	public void shareSub(Library lib, Subscription sub) {
+		lib.addSub(sub);
+	}
+	public void borrowBook(Library lib, Book book) {
+		books.add(book);
+		lib.books.remove(book);
+	}
+	public void returnBook(Library lib, Book book) {
+		books.remove(book);
+		lib.books.add(book);
 	}
 
 	public ArrayList<Subscription> getSubs() {
 		return subs;
 	}
-
 	public void setSubs(ArrayList<Subscription> subs) {
 		this.subs = subs;
 	}
-
 	public void addSub(Subscription sub) {
 		subs.add(sub);
 	}
@@ -53,16 +61,10 @@ public class Library {
 	public ArrayList<Department> getDeps() {
 		return deps;
 	}
-
 	public void setDeps(ArrayList<Department> deps) {
 		this.deps = deps;
 	}
-
 	public void addDepartment(Department dep) {
 		deps.add(dep);
-	}
-
-	public void agreement(Library lib) {
-
 	}
 }
