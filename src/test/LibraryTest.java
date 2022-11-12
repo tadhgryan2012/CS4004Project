@@ -32,6 +32,7 @@ public class LibraryTest {
 	 * accessed in other universities with which UWON has an agreement.
  	 */
 	@Test
+	@DisplayName("Share Subscriptions Test")
 	public void shareSubscriptionsTest() {
 		Library UL = new Library();
 		Library UCC = new Library();

@@ -45,4 +45,9 @@ public class Book {
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s by %s on %s", name, author, topic);
+	}
 }
