@@ -26,4 +26,13 @@ public class Subscription {
 	public void setBooks(ArrayList<Book> books) {
 		this.books = books;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder returnString = new StringBuilder(name + ": ");
+		books.forEach(book -> {
+			returnString.append(book + ", ");
+		});
+		return returnString.delete(returnString.length()-2, returnString.length()).toString();
+	}
 }

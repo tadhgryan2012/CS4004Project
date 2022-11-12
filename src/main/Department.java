@@ -1,26 +1,31 @@
 package main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Department {
-	private ArrayList<Book> books;
 	private ArrayList<Loan> loans;
 	private ArrayList<User> users;
 	private ArrayList<Staff> staff;
 
 	public Department() {
-		this.books = new ArrayList<>();
-		this.loans = new ArrayList<>();
-		this.users = new ArrayList<>();
-		this.staff = new ArrayList<>();
+		loans = new ArrayList<>();
+		users = new ArrayList<>();
+		staff = new ArrayList<>();
 	}
 
-	public ArrayList<Book> getBooks() {
-		return books;
+	public boolean loan(Book book, LocalDate date, User user) {
+		Loan loan = new Loan(book, date, user);
+		if (loans.contains(loan)) return false;
+		book.loan(loan);
+		loans.add(loan);
+		return true;
 	}
-
-	public void setBooks(ArrayList<Book> books) {
-		this.books = books;
+	public boolean returnLoan(Book book, LocalDate date, User user) {
+		return loans.remove(new Loan(book, date, user));
+	}
+	public ArrayList<Loan> getHistoryOfBook(Book book) {
+		return book.getHistory();
 	}
 
 	public ArrayList<Loan> getLoans() {
@@ -45,9 +50,5 @@ public class Department {
 
 	public void setStaff(ArrayList<Staff> staff) {
 		this.staff = staff;
-	}
-	
-	public void borrow(Department lib, Book book) {
-
 	}
 }

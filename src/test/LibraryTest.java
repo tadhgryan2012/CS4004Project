@@ -6,11 +6,15 @@ import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
 
 import main.Book;
+import main.Department;
 import main.Library;
+import main.Loan;
 import main.Subscription;
+import main.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,6 +31,22 @@ public class LibraryTest {
 	/* Acquisition of books or proceedings of marginal interest to the university, which
 	 * could be borrowed from other universities with which UWON has an agreement 
 	 */
+	@Test
+	@DisplayName("University sharing books Test")
+	public void shareBooksTest() {
+		Library UL = new Library();
+		Library UCC = new Library();
+
+		ArrayList<Book> books = new ArrayList<>(Arrays.asList(
+			new Book("Harry Potter and the Goblet of Fire", "J.K. Rowling", "Action"),
+			new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", "Comedy"),
+			new Book("Harry Potter and the Chamber of Secrets", "J.K. Rowling", "Fantasy")
+		));
+
+		UL.setBooks(books);
+		UL.agreement(UCC);
+		assertEquals(UL.getBooks(), UCC.getBooks());
+	}
 	
 	/* Subscription to journals of marginal interest to the university, which could be
 	 * accessed in other universities with which UWON has an agreement.
@@ -43,9 +63,11 @@ public class LibraryTest {
 			new Book("Shrek 3", "William Steig", "Comedy")
 		));
 
-		UL.addSub(new Subscription("Netflix", books));
-		UL.shareSubscription(UCC);
-		assertEquals(books, UCC.getSubs());
+		Subscription sub = new Subscription("Netflix", books);
+
+		UL.addSub(sub);
+		UL.agreement(UCC);
+		assertEquals(UL.getSubs(), UCC.getSubs());
 	}
 
 	/* Unavailability of requested books, for a variety of reasons such as department
@@ -59,6 +81,28 @@ public class LibraryTest {
 	/* Lack of traceability to previous borrowers when books, proceedings or journal
 	 * volumes are found to be damaged 
 	 */
+	@Test
+	@DisplayName("Show History of Ownership Test")
+	public void traceabilityTest() {
+		Department CSIS = new Department();
+
+		User john = new User();
+		User milan = new User();
+		Book book = new Book("Mein Kampf", "Adolf Hitler", "Gospel");
+
+		CSIS.loan(book, LocalDate.now().minusDays(15), john);
+		CSIS.returnLoan(book, LocalDate.now().minusDays(10), john);
+
+		CSIS.loan(book, LocalDate.now().minusDays(5), milan);
+		CSIS.returnLoan(book, LocalDate.now(), milan);
+
+		ArrayList<Loan> expectedResults = new ArrayList<>(Arrays.asList(
+			new Loan(book, LocalDate.now().minusDays(15), john), 
+			new Loan(book, LocalDate.now().minusDays(5), milan)
+		));
+
+		assertTrue(expectedResults.toString().equals(CSIS.getHistoryOfBook(book).toString()));		
+	}
 
 	/* Inaccuracy of card indexes, e.g. a book is stated as being available whereas it is not
 	 * found at the appropriate place on the shelves.

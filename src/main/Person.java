@@ -1,10 +1,11 @@
 package main;
 
 public class Person {
+	private static int idIdentifier;
 	private int id;
 	
-	public Person(int id) {
-		this.id = id;
+	public Person() {
+		this.id = idIdentifier++;
 	}
 
 	public int getId() {
@@ -13,5 +14,10 @@ public class Person {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%d", id);
 	}
 }

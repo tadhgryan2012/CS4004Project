@@ -6,11 +6,25 @@ public class Library {
 	private ArrayList<Department> deps;
 	private ArrayList<Subscription> subs;
 	private ArrayList<Library> libraries;
+	private ArrayList<Book> books;
+
 
 	public Library() {
 		deps = new ArrayList<>();
 		subs = new ArrayList<>();
 		libraries = new ArrayList<>();
+		books = new ArrayList<>();
+	}
+
+	public ArrayList<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(ArrayList<Book> books) {
+		this.books = books;
+	}
+	public void addBook(Book book) {
+		books.add(book);
 	}
 
 	public ArrayList<Library> getLibraries() {
@@ -44,7 +58,11 @@ public class Library {
 		this.deps = deps;
 	}
 
-	public void shareSubscription(Library lib) {
+	public void addDepartment(Department dep) {
+		deps.add(dep);
+	}
+
+	public void agreement(Library lib) {
 
 	}
 }
