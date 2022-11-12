@@ -142,7 +142,6 @@ public class LibraryTest {
         //book now available so it should assert true as john returned the loan.
         assertTrue(CSIS.loan(book, LocalDate.now().minusDays(15), milan));
     }
-}
 
     /* Bibliographical search restricted to library opening hours. Slow, tedious
      * bibliographical search due to manipulation of card indexes.
@@ -156,4 +155,4 @@ public class LibraryTest {
      * proceedings being indexed in other UWON department libraries, or unavailable at
      * UWON.
      */
-
+}
