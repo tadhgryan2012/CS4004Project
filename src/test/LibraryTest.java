@@ -1,9 +1,18 @@
 package test;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
+
+import main.Book;
+import main.Library;
+import main.Subscription;
+
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LibraryTest {
 	/*
@@ -22,6 +31,21 @@ public class LibraryTest {
 	/* Subscription to journals of marginal interest to the university, which could be
 	 * accessed in other universities with which UWON has an agreement.
  	 */
+	@Test
+	public void shareSubscriptionsTest() {
+		Library UL = new Library();
+		Library UCC = new Library();
+
+		ArrayList<Book> books = new ArrayList<>(Arrays.asList(
+			new Book("Shrek", "William Steig", "Comedy"),
+			new Book("Shrek 2", "William Steig", "Comedy"),
+			new Book("Shrek 3", "William Steig", "Comedy")
+		));
+
+		UL.addSub(new Subscription("Netflix", books));
+		UL.shareSubscription(UCC);
+		assertEquals(books, UCC.getSubs());
+	}
 
 	/* Unavailability of requested books, for a variety of reasons such as department
 	 * budget restrictions, excessive borrowing by the same user, lack of enforcement of

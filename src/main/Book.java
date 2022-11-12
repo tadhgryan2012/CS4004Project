@@ -1,13 +1,14 @@
 package main;
 
 public class Book {
+	private static int idIndicator;
 	private int id;
 	private String name;
 	private String author;
 	private String topic;
 	
-	public Book(int id, String name, String author, String topic) {
-		this.id = id;
+	public Book(String name, String author, String topic) {
+		this.id = idIndicator++;
 		this.name = name;
 		this.author = author;
 		this.topic = topic;
