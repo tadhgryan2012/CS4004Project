@@ -1,7 +1,6 @@
 package test;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.*;
 import org.junit.jupiter.params.provider.*;
@@ -12,12 +11,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-//import main.Book;
-//import main.Department;
-//import main.Library;
-//import main.Loan;
-//import main.Subscription;
-//import main.User;
+import main.Book;
+import main.Department;
+import main.Library;
+import main.Loan;
+import main.Subscription;
+import main.User;
 
 public class LibraryTest {
     /*
