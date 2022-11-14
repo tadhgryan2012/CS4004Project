@@ -1,4 +1,4 @@
-package main;
+package test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class Department {
 
     public boolean loan(Book book, LocalDate date, User user) {
         for (int i = 0; i < loans.size(); i++) {
-            if (loans.get(i).getBook() == book) return false;
+            if (loans.get(i).getBook().getId() == book.getId()) return false;
         }
         Loan loan = new Loan(book, date, user);
         book.loan(loan);
