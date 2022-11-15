@@ -45,11 +45,11 @@ public class Department {
 		return book.getHistory();
 	}
 
-	public ArrayList<Loan> getLoans() {
+	public HashMap<Book, Loan> getLoans() {
 		return loans;
 	}
 
-	public void setLoans(ArrayList<Loan> loans) {
+	public void setLoans(HashMap<Book, Loan> loans) {
 		this.loans = loans;
 	}
 
