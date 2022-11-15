@@ -130,7 +130,7 @@ public class LibraryTest {
     @Test
     @DisplayName("Card Index Test")
     public void cardIndexTest() {
-        Department CSIS = new Department();
+        Department Main = new Department();
         User john = new User();
         User milan = new User();
 
@@ -139,21 +139,22 @@ public class LibraryTest {
         Book book3 = new Book("The Return of the King", "J. R. R. Tolkien", "Fantasy");
         Book book4 = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
         //each book has a unique id
-        assertEquals(0, book.getId());
-        assertEquals(1, book2.getId());
-        assertEquals(2, book3.getId());
-        assertEquals(3, book4.getId());
-        CSIS.loan(book, LocalDate.now(), john);
-        CSIS.loan(book2, LocalDate.now(), john);
+        //NOTE: Doesnt work if you run this test individually as the ID's are 0,1,2,3 then.
+        assertEquals(5, book.getId());
+        assertEquals(6, book2.getId());
+        assertEquals(7, book3.getId());
+        assertEquals(8, book4.getId());
+        Main.loan(book, LocalDate.now(), john);
+        Main.loan(book2, LocalDate.now(), john);
         //Book not available therefore it should not allow Milan to loan it.
-        assertFalse(CSIS.loan(book, LocalDate.now(), milan));
+        assertFalse(Main.loan(book, LocalDate.now(), milan));
         //Same user tries loan the book twice returns false.
-        assertFalse(CSIS.loan(book2, LocalDate.now(), john));
+        assertFalse(Main.loan(book2, LocalDate.now(), john));
         //Book3 has not been loaned, it returns true and adds the loan to an arraylist.
-        assertTrue(CSIS.loan(book3, LocalDate.now(), john));
-        CSIS.returnLoan(book, LocalDate.now(), john);
+        assertTrue(Main.loan(book3, LocalDate.now(), john));
+        Main.returnLoan(book, LocalDate.now(), john);
         //Book now available so, it should assert true as John returned the loan.
-        assertTrue(CSIS.loan(book, LocalDate.now(), milan));
+        assertTrue(Main.loan(book, LocalDate.now(), milan));
     }
 
     /* Bibliographical search restricted to library opening hours. Slow, tedious
