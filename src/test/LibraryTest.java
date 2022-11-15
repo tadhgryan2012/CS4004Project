@@ -132,21 +132,51 @@ public class LibraryTest {
     /* Inaccuracy of card indexes, e.g. a book is stated as being available whereas it is not
      * found at the appropriate place on the shelves.
      */
+<<<<<<< HEAD
   @Test
     @DisplayName("Card Index Test")     // Brian
     public void cardIndexTest() {
         Library UL = new Library();
         Department CSIS = new Department(UL);
+=======
+    @Test
+    @DisplayName("Card Index Test")
+    public void cardIndexTest() {
+        Department Main = new Department();
+>>>>>>> f8e06be8d9963ffe47fd6d32b8330a9e6f238c06
         User john = new User();
         User milan = new User();
 
         Book book = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
+<<<<<<< HEAD
         CSIS.loan(book, LocalDate.now().minusDays(15), john);
         //Book not available therefore it should not allow Milan to loan it.
         assertFalse(CSIS.loan(book, LocalDate.now(), milan));
         CSIS.returnLoan(book);
         //Book now available so, it should assert true as John returned the loan.
         assertTrue(CSIS.loan(book, LocalDate.now(), milan));
+=======
+        Book book2 = new Book("The Two Towers", "J. R. R. Tolkien", "Fantasy");
+        Book book3 = new Book("The Return of the King", "J. R. R. Tolkien", "Fantasy");
+        Book book4 = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
+        //each book has a unique id
+        //NOTE: Doesnt work if you run this test individually as the ID's are 0,1,2,3 then.
+        assertEquals(5, book.getId());
+        assertEquals(6, book2.getId());
+        assertEquals(7, book3.getId());
+        assertEquals(8, book4.getId());
+        Main.loan(book, LocalDate.now(), john);
+        Main.loan(book2, LocalDate.now(), john);
+        //Book not available therefore it should not allow Milan to loan it.
+        assertFalse(Main.loan(book, LocalDate.now(), milan));
+        //Same user tries loan the book twice returns false.
+        assertFalse(Main.loan(book2, LocalDate.now(), john));
+        //Book3 has not been loaned, it returns true and adds the loan to an arraylist.
+        assertTrue(Main.loan(book3, LocalDate.now(), john));
+        Main.returnLoan(book, LocalDate.now(), john);
+        //Book now available so, it should assert true as John returned the loan.
+        assertTrue(Main.loan(book, LocalDate.now(), milan));
+>>>>>>> f8e06be8d9963ffe47fd6d32b8330a9e6f238c06
     }
 
     /* Bibliographical search restricted to library opening hours. Slow, tedious
