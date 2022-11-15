@@ -39,9 +39,9 @@ public class Department {
    	public boolean returnLoan(Book book, LocalDate date, User user) {
         	for (int i = 0; i < loans.size(); i++) {
            		if (loans.get(i).getBook() == book && loans.get(i).getUser() == user) {
-                return loans.remove(loans.get(i));
-           	}
-        }
+                	return loans.remove(loans.get(i));
+           		}
+       		 }
         return false;
    	} */
 	
