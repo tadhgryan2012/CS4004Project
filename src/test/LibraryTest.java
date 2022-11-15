@@ -127,7 +127,7 @@ public class LibraryTest {
     /* Inaccuracy of card indexes, e.g. a book is stated as being available whereas it is not
      * found at the appropriate place on the shelves.
      */
-    @Test
+  @Test
     @DisplayName("Card Index Test")
     public void cardIndexTest() {
         Department CSIS = new Department();
@@ -135,12 +135,13 @@ public class LibraryTest {
         User milan = new User();
 
         Book book = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
-        CSIS.loan(book, LocalDate.now().minusDays(15), john);
+        CSIS.loan(book, LocalDate.now(), john);
         //Book not available therefore it should not allow Milan to loan it.
-        assertFalse(CSIS.loan(book, LocalDate.now().minusDays(15), milan));
+        assertFalse(CSIS.loan(book, LocalDate.now(), milan));
         CSIS.returnLoan(book, LocalDate.now(), john);
-        //book now available so it should assert true as john returned the loan.
+        //Book now available so, it should assert true as John returned the loan.
         assertTrue(CSIS.loan(book, LocalDate.now().minusDays(15), milan));
+
     }
 
     /* Bibliographical search restricted to library opening hours. Slow, tedious
