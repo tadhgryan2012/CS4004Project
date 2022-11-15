@@ -22,14 +22,9 @@ public class Department {
 		return true;
    	}
 	
-    	public boolean returnLoan(Book book, LocalDate date, User user) {
-        for (int i = 0; i < loans.size(); i++) {
-            if (loans.get(i).getBook() == book && loans.get(i).getUser() == user) {
-                return loans.remove(loans.get(i));
-            }
-        }
-        return false;
-   	}
+	public boolean returnLoan(Book book, LocalDate date, User user) {
+		return loans.remove(new Loan(book, date, user));
+	}
 	
 	public ArrayList<Loan> getHistoryOfBook(Book book) {
 		return book.getHistory();
