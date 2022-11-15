@@ -2,30 +2,45 @@ package main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Department {
-	private ArrayList<Loan> loans;
+	private Library library;
+	private HashMap<Book, Loan> loans;
 	private ArrayList<User> users;
 	private ArrayList<Staff> staff;
 
-	public Department() {
-		loans = new ArrayList<>();
+	public Department(Library library) {
+		this.library = library;
+		loans = new HashMap<>();
 		users = new ArrayList<>();
 		staff = new ArrayList<>();
 	}
 
 	public boolean loan(Book book, LocalDate date, User user) {
 		Loan loan = new Loan(book, date, user);
-		if (loans.contains(loan)) return false;
+		if (getBooksOnLoan().contains(book)) return false;
 		book.loan(loan);
-		loans.add(loan);
+		loans.put(book, loan);
 		return true;
    	}
 	
-	public boolean returnLoan(Book book, LocalDate date, User user) {
-		return loans.remove(new Loan(book, date, user));
+	public boolean returnLoan(Book book) {
+		Loan loan = loans.get(book);
+		if (loan == null)
+			return false;
+		loans.remove(book);
+		return true;
+	}
+
+	private ArrayList<Book> getBooksOnLoan() {
+		return new ArrayList<>(loans.keySet());
 	}
 	
+	public Library getLibrary() {
+		return library;
+	}
+
 	public ArrayList<Loan> getHistoryOfBook(Book book) {
 		return book.getHistory();
 	}

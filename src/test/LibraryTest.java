@@ -20,6 +20,7 @@ import main.User;
 
 public class LibraryTest {
     /* 
+     * Sophie
      * Unnecessary duplicate acquisition, by several departments, of infrequently accessed
      * copies of books or proceedings that are relevant to more than one department.
      */
@@ -28,7 +29,7 @@ public class LibraryTest {
      * relevant to more than one department.
      */
     @Test
-    @DisplayName("Unnecessary Subscriptions Test")
+    @DisplayName("Unnecessary Subscriptions Test")      // Brian
     public void unnecessarySubTest() {
         Library UL = new Library();
         Library UCC = new Library();
@@ -52,7 +53,7 @@ public class LibraryTest {
      * could be borrowed from other universities with which UWON has an agreement
      */
     @Test
-    @DisplayName("University Sharing Books Test")
+    @DisplayName("University Sharing Books Test")       // Tadhg
     public void shareBooksTest() {
         Library UL = new Library();
         Library UCC = new Library();
@@ -71,7 +72,7 @@ public class LibraryTest {
      * accessed in other universities with which UWON has an agreement.
      */
     @Test
-    @DisplayName("Share Subscriptions Test")
+    @DisplayName("Share Subscriptions Test")            // Tadhg
     public void shareSubscriptionsTest() {
         Library UL = new Library();
         Library UCC = new Library();
@@ -90,7 +91,8 @@ public class LibraryTest {
         assertEquals(UL.getSubs(), UCC.getSubs());
     }
 
-    /* Unavailability of requested books, for a variety of reasons such as department
+    /* Sophie
+     * Unavailability of requested books, for a variety of reasons such as department
      * budget restrictions, excessive borrowing by the same user, lack of enforcement of
      * rules limiting loan periods, loss or stealing of book copies and so on.
      */
@@ -102,25 +104,28 @@ public class LibraryTest {
      * volumes are found to be damaged
      */
     @Test
-    @DisplayName("Show History of Ownership Test")
+    @DisplayName("Show History of Ownership Test")      // Tadhg
     public void traceabilityTest() {
-        Department CSIS = new Department();
+        Library UL = new Library();
+        Department CSIS = new Department(UL);
 
         User john = new User();
         User milan = new User();
         Book book = new Book("Mein Kampf", "Adolf Hitler", "Gospel");
 
         CSIS.loan(book, LocalDate.now().minusDays(15), john);
-        CSIS.returnLoan(book, LocalDate.now().minusDays(10), john);
+        CSIS.returnLoan(book);
 
         CSIS.loan(book, LocalDate.now().minusDays(5), milan);
-        CSIS.returnLoan(book, LocalDate.now(), milan);
+        CSIS.returnLoan(book);
 
         ArrayList<Loan> expectedResults = new ArrayList<>(Arrays.asList(
                 new Loan(book, LocalDate.now().minusDays(15), john),
                 new Loan(book, LocalDate.now().minusDays(5), milan)
         ));
 
+        System.out.println("Expected Results: " + expectedResults.toString());
+        System.out.println("Actual Results: " + CSIS.getHistoryOfBook(book).toString());
         assertTrue(expectedResults.toString().equals(CSIS.getHistoryOfBook(book).toString()));
     }
 
@@ -128,27 +133,28 @@ public class LibraryTest {
      * found at the appropriate place on the shelves.
      */
   @Test
-    @DisplayName("Card Index Test")
+    @DisplayName("Card Index Test")     // Brian
     public void cardIndexTest() {
-        Department CSIS = new Department();
+        Library UL = new Library();
+        Department CSIS = new Department(UL);
         User john = new User();
         User milan = new User();
 
         Book book = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
-        CSIS.loan(book, LocalDate.now(), john);
+        CSIS.loan(book, LocalDate.now().minusDays(15), john);
         //Book not available therefore it should not allow Milan to loan it.
         assertFalse(CSIS.loan(book, LocalDate.now(), milan));
-        CSIS.returnLoan(book, LocalDate.now(), john);
+        CSIS.returnLoan(book);
         //Book now available so, it should assert true as John returned the loan.
-        assertTrue(CSIS.loan(book, LocalDate.now().minusDays(15), milan));
-
+        assertTrue(CSIS.loan(book, LocalDate.now(), milan));
     }
 
     /* Bibliographical search restricted to library opening hours. Slow, tedious
      * bibliographical search due to manipulation of card indexes.
      */
 
-    /* Inaccurate search results, due to poor classification of books, journals or
+    /* Sophie
+     * Inaccurate search results, due to poor classification of books, journals or
      * proceedings within departments
      */
 
