@@ -205,8 +205,36 @@ public class LibraryTest {
      * proceedings within departments
      */
 
-    /* Incomplete or ineffective search results, due to relevant books, journals or
+    /*Callum
+     * Incomplete or ineffective search results, due to relevant books, journals or
      * proceedings being indexed in other UWON department libraries, or unavailable at
      * UWON.
      */
+    @Test
+    @DisplayName("Search other UWON departments test")
+    public void searchDepartment() {
+        Library UL = new Library();
+        Library UCC = new Library();
+        ArrayList<Book> books = new ArrayList<Book>();
+        Book floor = new Book("The Maze Runner", "James Dashner", "Action");
+        Book ceiling = new Book("The Scorch Trials", "James Dashner", "Action" );
+        books.add(floor);
+        books.add(ceiling);
+        UL.addBook(floor);
+        UL.addBook(ceiling);
+
+       Subscription sub = new Subscription("Maze Runner Trilogy", books);
+       UL.addSub(sub);
+
+
+        assertEquals(sub, UL.searchByTitle("the"));
+
+
+
+       // UL.addSub(sub);
+       // UL.addAggreement(UCC);
+       // UL.shareSub(UCC, sub);
+       // assertEquals(UL.getSubs(), UCC.getSubs());
+    }
+    
 }
