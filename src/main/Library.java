@@ -67,4 +67,30 @@ public class Library {
 	public void addDepartment(Department dep) {
 		deps.add(dep);
 	}
+	public Book[] searchByTitle(String title){
+		title = title.toLowerCase() ;
+
+		int numberOfBooks = 0;
+
+		for (int i = 0; i < books.size(); i++){
+			if (books.get(i).getName().toLowerCase().contains(title)){
+				numberOfBooks++ ;
+
+			}
+		}
+		Book[] results = new Book[numberOfBooks];
+		int count = 0 ;
+		for(int i = 0; i < books.size(); i++){
+			if (books.get(i).getName().toLowerCase().contains(title)){
+				results[count] = books.get(i);
+						count++;
+			}
+
+
+		}
+		return results ;
+
+
+
+	}
 }
