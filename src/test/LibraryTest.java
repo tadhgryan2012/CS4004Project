@@ -123,7 +123,7 @@ public class LibraryTest {
 
         /* This is basically our yearly volume collection but we add them into it one by one when we get the new volumes.
         Next year you can create Exploring the World 2023 subscription.
-        Through this subscription you get access to every volume at all times. */
+        Through this subscription you get access to every volume at all times and its organised under one subscription so its easy to track volumes */
         Subscription sub = new Subscription("Exploring the World 2022", books);
         //UL has the subscription and has the choice to share it with other partnered Libraries.
         UL.addSub(sub);
