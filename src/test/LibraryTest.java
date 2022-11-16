@@ -99,6 +99,39 @@ public class LibraryTest {
 
     /* Unavailability of journal issues while they are being bound into yearly volumes
      */
+    @Test
+    @DisplayName("Unavailability of monthly journal issues")
+    public void unavailabilityOfMonthlyJournalIssues() {
+        Library UL = new Library();
+        Department Main = new Department();
+        User Chuck = new User();
+
+        //We have an empty arraylist here which we can add each volume of the journal when they come out.
+        ArrayList<Book> books = new ArrayList<>(Arrays.asList(
+        ));
+
+        Book book = new Book("Exploring the World Volume 1", "John Doe", "Educational");
+        Book book2 = new Book("Exploring the World Volume 2", "John Doe", "Educational");
+        Book book3 = new Book("Exploring the World Volume 3", "John Doe", "Educational");
+        Book book4 = new Book("Exploring the World Volume 4", "John Doe", "Educational");
+
+        //Each time a new volume of the journal comes out simply add the book to the collection "Exploring the World"
+        books.add(book);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+
+        /* This is basically our yearly volume collection but we add them into it one by one when we get the new volumes.
+        Next year you can create Exploring the World 2023 subscription.
+        Through this subscription you get access to every volume at all times. */
+        Subscription sub = new Subscription("Exploring the World 2022", books);
+        //UL has the subscription and has the choice to share it with other partnered Libraries.
+        UL.addSub(sub);
+        //Chuck loans one volume only from the journal
+        assertTrue(Main.loan(book, LocalDate.now(), Chuck));
+        //When the yearly volume is completed you just simply add it as its own book
+        Book book5 = new Book("Exploring the World 2022 All Volumes", "John Doe", "Educational");
+    }
 
     /* Lack of traceability to previous borrowers when books, proceedings or journal
      * volumes are found to be damaged
