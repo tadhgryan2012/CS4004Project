@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Department {
+	private Library library;
 	private HashMap<Book, Loan> loans;
 	private ArrayList<User> users;
 	private ArrayList<Staff> staff;
 
-	public Department() {
+	public Department(Library library) {
+		this.library = library;
 		loans = new HashMap<>();
 		users = new ArrayList<>();
 		staff = new ArrayList<>();
@@ -25,6 +27,11 @@ public class Department {
 	public boolean returnLoan(Book book, LocalDate loanDate, LocalDate returnDate, User user) {
 		return loans.remove(book, new Loan(book, loanDate, user));
 	}
+	
+	public Library getLibrary() {
+		return library;
+	}
+
 	public ArrayList<Loan> getHistoryOfBook(Book book) {
 		return book.getHistory();
 	}
