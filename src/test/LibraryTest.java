@@ -110,15 +110,16 @@ public class LibraryTest {
     @DisplayName("Unavailability of books Test")
     public void unavailabilityTest() {
         Library UL = new Library();
-        Department CSIS = new Department();
+        Department CSIS = new Department(UL);
 
         User michael = new User();
         Book book = new Book("1984", "George Orwell", "Dystopian");
 
         CSIS.loan(book, LocalDate.now(), michael);
-        CSIS.returnLoan(book, LocalDate.now(), michael);
-                
+        CSIS.returnLoan(book);
 
+        CSIS.loan(book, LocalDate.now(), michael);
+        assertFalse(CSIS.loan(book, LocalDate.now(), michael));              
     }
     /* Unavailability of journal issues while they are being bound into yearly volumes
      */
@@ -180,8 +181,8 @@ public class LibraryTest {
     @Test
     @DisplayName("Inaccurate search resutls Test")
     public void searchResultsTest() {
-        Department CSIS = new Department();
-        Department Kemmy = new Department();
+        Department CSIS = new Department(UL);
+        Department Kemmy = new Department(UL);
 
         
     /* Incomplete or ineffective search results, due to relevant books, journals or
