@@ -137,10 +137,10 @@ public class LibraryTest {
         Book book = new Book("Mein Kampf", "Adolf Hitler", "Gospel");
 
         CSIS.loan(book, LocalDate.now().minusDays(15), john);
-        CSIS.returnLoan(book, LocalDate.now().minusDays(10), john);
+        CSIS.returnLoan(book);
 
         CSIS.loan(book, LocalDate.now().minusDays(5), milan);
-        CSIS.returnLoan(book, LocalDate.now(), milan);
+        CSIS.returnLoan(book);
 
         ArrayList<Loan> expectedResults = new ArrayList<>(Arrays.asList(
                 new Loan(book, LocalDate.now().minusDays(15), john),
