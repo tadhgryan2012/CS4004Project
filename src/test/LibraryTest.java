@@ -144,7 +144,7 @@ public class LibraryTest {
 
         User john = new User();
         User milan = new User();
-        Book book = new Book("Mein Kampf", "Adolf Hitler", "Gospel");
+        Book book = new Book("Foundations of Software Testing", "Dorothy Graham", "Pain");
         UL.addBook(book);
 
         CSIS.loan(book, LocalDate.now().minusDays(15), john);
@@ -158,8 +158,6 @@ public class LibraryTest {
                 new Loan(book, LocalDate.now().minusDays(5), milan)
         ));
 
-        System.out.println("Expected Results: " + expectedResults.toString());
-        System.out.println("Actual Results: " + CSIS.getHistoryOfBook(book).toString());
         assertEquals(expectedResults.toString(), CSIS.getHistoryOfBook(book).toString());
     }
 

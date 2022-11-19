@@ -43,6 +43,7 @@ public class Library {
 		lib.addSub(sub);
 	}
 	public void borrowBook(Library lib, Book book) {
+		if (!aggreements.contains(lib)) return;
 		books.add(book);
 		lib.books.remove(book);
 	}
