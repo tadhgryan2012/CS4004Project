@@ -25,6 +25,9 @@ public class Library {
 	public void addBook(Book book) {
 		books.add(book);
 	}
+	public void removeBook(Book book) {
+		books.remove(book);
+	}
 
 	public ArrayList<Library> getAggreements() {
 		return aggreements;

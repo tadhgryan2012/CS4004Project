@@ -103,7 +103,7 @@ public class LibraryTest {
     @DisplayName("Unavailability of monthly journal issues")
     public void unavailabilityOfMonthlyJournalIssues() {
         Library UL = new Library();
-        Department Main = new Department();
+        Department Main = new Department(UL);
         User Chuck = new User();
 
         //We have an empty arraylist here which we can add each volume of the journal when they come out.
@@ -145,6 +145,7 @@ public class LibraryTest {
         User john = new User();
         User milan = new User();
         Book book = new Book("Mein Kampf", "Adolf Hitler", "Gospel");
+        UL.addBook(book);
 
         CSIS.loan(book, LocalDate.now().minusDays(15), john);
         CSIS.returnLoan(book);
@@ -159,7 +160,7 @@ public class LibraryTest {
 
         System.out.println("Expected Results: " + expectedResults.toString());
         System.out.println("Actual Results: " + CSIS.getHistoryOfBook(book).toString());
-        assertTrue(expectedResults.toString().equals(CSIS.getHistoryOfBook(book).toString()));
+        assertEquals(expectedResults.toString(), CSIS.getHistoryOfBook(book).toString());
     }
 
     /* Inaccuracy of card indexes, e.g. a book is stated as being available whereas it is not

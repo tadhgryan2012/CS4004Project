@@ -18,14 +18,17 @@ public class Department {
 	}
 
 	public boolean loan(Book book, LocalDate date, User user) {
+		library.removeBook(book);
 		Loan loan = new Loan(book, date, user);
 		if (loans.get(book) == null) return false;
 		book.loan(loan);
 		loans.put(book, loan);
 		return true;
 	}
-	public boolean returnLoan(Book book, LocalDate loanDate, LocalDate returnDate, User user) {
-		return loans.remove(book, new Loan(book, loanDate, user));
+	public boolean returnLoan(Book book) {
+		loans.remove(book);
+		library.addBook(book);
+		return true;
 	}
 	
 	public Library getLibrary() {
