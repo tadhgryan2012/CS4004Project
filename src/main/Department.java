@@ -18,12 +18,20 @@ public class Department {
 	}
 
 	public boolean loan(Book book, LocalDate date, User user) {
+		for(Loan loan :book.getHistory()) {
+			if (!loan.getUser().equals(user)){
+				continue;
+			}
+			if (loan.getDateOfLoan().isAfter(date.minusMonths(6))){
+				return false;
+			}
+		}
 		Loan loan = new Loan(book, date, user);
 		if (loans.containsKey(book)) return false;
 		if (!library.removeBook(book)) return false;
 		book.loan(loan);
 		loans.put(book, loan);
-		return true;
+		return true;	
 	}
 	public boolean returnLoan(Book book) {
 		if (loans.remove(book) == null) return false;

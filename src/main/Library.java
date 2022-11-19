@@ -97,4 +97,14 @@ public class Library {
 
 
 	}
+
+    public ArrayList<Book> searchTopic(String topic) {
+		ArrayList<Book> tempBooks = new ArrayList<>();
+		for (Book book : books){
+			if (book.getTopic().equals(topic)){
+				tempBooks.add(book);
+			}
+		}
+        return tempBooks;
+    }
 }

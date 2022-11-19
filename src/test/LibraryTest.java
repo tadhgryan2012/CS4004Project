@@ -181,13 +181,22 @@ public class LibraryTest {
     @Test
     @DisplayName("Inaccurate search resutls Test")
     public void searchResultsTest() {
-        Department CSIS = new Department(UL);
-        Department Kemmy = new Department(UL);
+        Library UL = new Library();
+        
+        Book book = new Book("The Very Hungry Caterpillar", "Eric Carle", "Fiction");
+        Book book1 = new Book("The Gruffalo", "Julia Donaldson", "Nature");
+        Book book2 = new Book("Diper Överlöde: Diary of a Wimpy Kid", "Jeff Kinney", "Humor");
 
+        UL.addBook(book);
+        UL.addBook(book1);
+        UL.addBook(book2);
+
+        assertEquals(book, UL.searchTopic("Fiction").get(0));
+    }
         
     /* Incomplete or ineffective search results, due to relevant books, journals or
      * proceedings being indexed in other UWON department libraries, or unavailable at
      * UWON.
      */
-}
+
 }
