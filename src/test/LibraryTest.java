@@ -128,13 +128,15 @@ public class LibraryTest {
      * volumes are found to be damaged
      */
     @Test
-    @DisplayName("Show History of Ownership Test")
+    @DisplayName("Show History of Ownership Test")      // Tadhg
     public void traceabilityTest() {
-        Department CSIS = new Department();
+        Library UL = new Library();
+        Department CSIS = new Department(UL);
 
         User john = new User();
         User milan = new User();
-        Book book = new Book("Mein Kampf", "Adolf Hitler", "Gospel");
+        Book book = new Book("Foundations of Software Testing", "Dorothy Graham", "Pain");
+        UL.addBook(book);
 
         CSIS.loan(book, LocalDate.now().minusDays(15), john);
         CSIS.returnLoan(book);
@@ -147,7 +149,7 @@ public class LibraryTest {
                 new Loan(book, LocalDate.now().minusDays(5), milan)
         ));
 
-        assertTrue(expectedResults.toString().equals(CSIS.getHistoryOfBook(book).toString()));
+        assertEquals(expectedResults.toString(), CSIS.getHistoryOfBook(book).toString());
     }
 
     /* Inaccuracy of card indexes, e.g. a book is stated as being available whereas it is not
@@ -156,7 +158,8 @@ public class LibraryTest {
   @Test
     @DisplayName("Card Index Test")
     public void cardIndexTest() {
-        Department CSIS = new Department();
+        Library UL = new Library();
+        Department CSIS = new Department(UL);
         User john = new User();
         User milan = new User();
 
@@ -164,7 +167,7 @@ public class LibraryTest {
         CSIS.loan(book, LocalDate.now(), john);
         //Book not available therefore it should not allow Milan to loan it.
         assertFalse(CSIS.loan(book, LocalDate.now(), milan));
-        CSIS.returnLoan(book, LocalDate.now(), john);
+        CSIS.returnLoan(book);
         //Book now available so, it should assert true as John returned the loan.
         assertTrue(CSIS.loan(book, LocalDate.now().minusDays(15), milan));
 
