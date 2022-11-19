@@ -25,8 +25,8 @@ public class Library {
 	public void addBook(Book book) {
 		books.add(book);
 	}
-	public void removeBook(Book book) {
-		books.remove(book);
+	public boolean removeBook(Book book) {
+		return books.remove(book);
 	}
 
 	public ArrayList<Library> getAggreements() {

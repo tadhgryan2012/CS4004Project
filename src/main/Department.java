@@ -18,15 +18,15 @@ public class Department {
 	}
 
 	public boolean loan(Book book, LocalDate date, User user) {
-		library.removeBook(book);
 		Loan loan = new Loan(book, date, user);
-		if (loans.get(book) == null) return false;
+		if (loans.containsKey(book)) return false;
+		if (!library.removeBook(book)) return false;
 		book.loan(loan);
 		loans.put(book, loan);
 		return true;
 	}
 	public boolean returnLoan(Book book) {
-		loans.remove(book);
+		if (loans.remove(book) == null) return false;
 		library.addBook(book);
 		return true;
 	}
