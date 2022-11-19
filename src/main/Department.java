@@ -62,4 +62,8 @@ public class Department {
 	public void setStaff(ArrayList<Staff> staff) {
 		this.staff = staff;
 	}
+
+    public ArrayList<Book> getBooks() {
+        return library.getBooks();
+    }
 }
