@@ -231,6 +231,7 @@ public class LibraryTest {
         assertTrue(DCU.returnBook(UCC, book1));
         assertFalse(DCU.returnBook(NUIG, book2));
     }
+    
     @Test
     @DisplayName("Search by Title Test")            // Tadhg
     public void searchByTitleTest() {
@@ -245,6 +246,7 @@ public class LibraryTest {
         assertEquals(book1, LIT.searchByTitle("Beast").get(0));
         assertEquals(new ArrayList<Book>(), LIT.searchByTitle("This will return an empty set"));
     }
+
     @Test
     @DisplayName("Subscriptions Test")
     public void subTest() {
