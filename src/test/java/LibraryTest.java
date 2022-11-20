@@ -176,9 +176,9 @@ public class LibraryTest {
         Book book3 = new Book("The Return of the King", "J. R. R. Tolkien", "Fantasy");
         Book book4 = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
         //each book has a unique id
-        assertEquals(book.getId()+1, book2.getId());
-        assertEquals(book2.getId()+1, book3.getId());
-        assertEquals(book3.getId()+1, book4.getId());
+        assertEquals(book.getID()+1, book2.getID());
+        assertEquals(book2.getID()+1, book3.getID());
+        assertEquals(book3.getID()+1, book4.getID());
         //Since its taking the time now we can minus days for the loan so the loan is from X days ago, and use plusDays when returning.
         Main.loan(book, LocalDate.now().minusDays(2), john);
         Main.loan(book2, LocalDate.now().minusDays(3), john);

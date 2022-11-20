@@ -54,6 +54,14 @@ public class Book {
 		return topic;
 	}
 
+	/**
+	 * Gets ID
+	 * @return
+	 */
+	public int getID() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s by %s on %s", name, author, topic);
