@@ -1,20 +1,10 @@
-//import org.junit.Assert;
 import org.junit.jupiter.api.*;
-//import org.junit.jupiter.params.*;
-//import org.junit.jupiter.params.provider.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-//import main.Book;
-//import main.Department;
-//import main.Library;
-//import main.Loan;
-//import main.Subscription;
-//import main.User;
 
 public class LibraryTest {
     /* Lack of traceability to previous borrowers when books, proceedings or journal
@@ -127,7 +117,7 @@ public class LibraryTest {
      * proceedings within departments
      */
     @Test
-    @DisplayName("Inaccurate search resutls Test")          // Sophie
+    @DisplayName("Inaccurate search results Test")          // Sophie
     public void searchResultsTest() {
         Library UL = new Library();
         
@@ -174,12 +164,12 @@ public class LibraryTest {
     public void cardIndexTest() {
         Library UL = new Library();
         Department CSIS = new Department(UL);
-        User john = new User();
+        User italo = new User();
         User milan = new User();
 
         Book book = new Book("The Fellowship of the Ring", "J. R. R. Tolkien", "Fantasy");
         UL.addBook(book);
-        CSIS.loan(book, LocalDate.now(), john);
+        CSIS.loan(book, LocalDate.now(), italo);
         //Book not available therefore it should not allow Milan to loan it.
         assertFalse(CSIS.loan(book, LocalDate.now(), milan));
         CSIS.returnLoan(book);
@@ -224,8 +214,8 @@ public class LibraryTest {
         Library UCC = new Library();
         Library NUIG = new Library();
 
-        Book book1 = new Book("Dictionary", "Willian Shakespear", "Humour");
-        Book book2 = new Book("Thesaurus", "Tadhg Ryan", "Homour");
+        Book book1 = new Book("Dictionary", "William Shakespeare", "Humour");
+        Book book2 = new Book("Thesaurus", "Tadhg Ryan", "Humour");
 
         UCC.addBook(book1);
         NUIG.addBook(book2);
@@ -254,5 +244,17 @@ public class LibraryTest {
         
         assertEquals(book1, LIT.searchByTitle("Beast").get(0));
         assertEquals(new ArrayList<Book>(), LIT.searchByTitle("This will return an empty set"));
+    }
+    @Test
+    @DisplayName("Subscriptions Test")
+    public void subTest() {
+        ArrayList<Book> comics = new ArrayList<>();
+        comics.add(new Book("Superman", "Clark Kent", "Action"));
+        comics.add(new Book("The Flash", "Barry Allen", "Speed"));
+
+        Subscription sub1 = new Subscription("Milan's Comics", comics);
+
+        assertEquals(sub1.getBooks(), comics);
+        assertEquals(sub1.getName(), "Milan's Comics");
     }
 }
