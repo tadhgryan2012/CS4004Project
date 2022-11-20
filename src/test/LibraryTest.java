@@ -236,7 +236,6 @@ public class LibraryTest {
         Subscription sub = new Subscription("Exploring the World", books);
         //UL has the subscription and has the choice to share it with other partnered Libraries.
         UL.addSub(sub);
-        //Chuck loans one volume only from the journal
         assertEquals(books, UL.getBooks());
         //When the yearly volume is completed you just simply add it as its own book
         Book book5 = new Book("Exploring the World 2022 All Volumes", "John Doe", "Educational");
