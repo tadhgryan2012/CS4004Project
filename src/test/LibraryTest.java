@@ -151,8 +151,9 @@ public class LibraryTest {
     @DisplayName("Unnecessary Subscriptions Test")              // Brian
     public void unnecessarySubTest() {
         Library UL = new Library();
-        Library UCC = new Library();
-        Library Trinity = new Library();
+        Department CSIS = new Department(UL);
+        Department Biology = new Department(UL);
+        Department Science = new Department(UL);
 
         ArrayList<Book> books = new ArrayList<>(Arrays.asList(
                 new Book("A Game of Thrones", "George R. R. Martin", "Fantasy"),
@@ -163,13 +164,12 @@ public class LibraryTest {
         Subscription subs = new Subscription("Game of Thrones Trilogy", books);
 
         UL.addSub(subs);
-        assertNotEquals(UL.getSubs (), UCC.getSubs());
-        UL.addAggreement(UCC);
-        UL.shareSub(UCC, subs);
-        UL.addAggreement(Trinity);
-        UL.shareSub(Trinity, subs);
-        assertEquals(UL.getSubs(), UCC.getSubs());
-        assertEquals(UCC.getSubs(), Trinity.getSubs());
+        //No single department has subs, only UL as a whole, Duplicates not possible.
+        assertNotEquals(UL.getSubs(), CSIS.getBooks());
+        assertNotEquals(UL.getSubs(), Biology.getBooks());
+        assertNotEquals(UL.getSubs(), Science.getBooks());
+        assertEquals(0, CSIS.getBooks().size());
+
     }
 
     /* Inaccuracy of card indexes, e.g. a book is stated as being available whereas it is not
