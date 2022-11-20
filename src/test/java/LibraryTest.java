@@ -1,20 +1,10 @@
-//import org.junit.Assert;
 import org.junit.jupiter.api.*;
-//import org.junit.jupiter.params.*;
-//import org.junit.jupiter.params.provider.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-//import main.Book;
-//import main.Department;
-//import main.Library;
-//import main.Loan;
-//import main.Subscription;
-//import main.User;
 
 public class LibraryTest {
     /* Lack of traceability to previous borrowers when books, proceedings or journal
@@ -127,7 +117,7 @@ public class LibraryTest {
      * proceedings within departments
      */
     @Test
-    @DisplayName("Inaccurate search resutls Test")          // Sophie
+    @DisplayName("Inaccurate search results Test")          // Sophie
     public void searchResultsTest() {
         Library UL = new Library();
         
@@ -271,8 +261,8 @@ public class LibraryTest {
         Library UCC = new Library();
         Library NUIG = new Library();
 
-        Book book1 = new Book("Dictionary", "Willian Shakespear", "Humour");
-        Book book2 = new Book("Thesaurus", "Tadhg Ryan", "Homour");
+        Book book1 = new Book("Dictionary", "William Shakespeare", "Humour");
+        Book book2 = new Book("Thesaurus", "Tadhg Ryan", "Humour");
 
         UCC.addBook(book1);
         NUIG.addBook(book2);
@@ -288,6 +278,7 @@ public class LibraryTest {
         assertTrue(DCU.returnBook(UCC, book1));
         assertFalse(DCU.returnBook(NUIG, book2));
     }
+    
     @Test
     @DisplayName("Search by Title Test")            // Tadhg
     public void searchByTitleTest() {
@@ -301,5 +292,18 @@ public class LibraryTest {
         
         assertEquals(book1, LIT.searchByTitle("Beast").get(0));
         assertEquals(new ArrayList<Book>(), LIT.searchByTitle("This will return an empty set"));
+    }
+
+    @Test
+    @DisplayName("Subscriptions Test")
+    public void subTest() {
+        ArrayList<Book> comics = new ArrayList<>();
+        comics.add(new Book("Superman", "Clark Kent", "Action"));
+        comics.add(new Book("The Flash", "Barry Allen", "Speed"));
+
+        Subscription sub1 = new Subscription("Milan's Comics", comics);
+
+        assertEquals(sub1.getBooks(), comics);
+        assertEquals(sub1.getName(), "Milan's Comics");
     }
 }
