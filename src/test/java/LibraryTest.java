@@ -306,4 +306,31 @@ public class LibraryTest {
         assertEquals(sub1.getBooks(), comics);
         assertEquals(sub1.getName(), "Milan's Comics");
     }
+    
+    @Test
+    @DisplayName("Search other UWON departments test")          // Callum
+    public void searchDepartment() {
+        Library UL = new Library();
+        Library UCC = new Library();
+
+        Book floor = new Book("The Maze Runner", "James Dashner", "Action");
+        Book ceiling = new Book("The Scorch Trials", "James Dashner", "Action" );
+
+        UL.addBook(floor);
+        UL.addBook(ceiling);
+
+        UCC.addBook(floor);
+        UCC.addBook(ceiling);
+
+        //Both libraries have 2 search results as they both have the same books.
+        assertEquals(UL.searchByTitle("The").length, UCC.searchByTitle("the").length);
+
+        Book wall = new Book("The Death Cure", "James Dashner", "Action");
+
+        UCC.addBook(wall);
+
+        //UL has 2 results while UCC has 3 since Ul does not have the third book.
+        assertNotEquals(UL.searchByTitle("The").length, UCC.searchByTitle("the").length);
+
+    }
 }
