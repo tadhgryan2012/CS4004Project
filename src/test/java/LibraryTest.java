@@ -323,14 +323,14 @@ public class LibraryTest {
         UCC.addBook(ceiling);
 
         //Both libraries have 2 search results as they both have the same books.
-        assertEquals(UL.searchByTitle("The").length, UCC.searchByTitle("the").length);
+        assertEquals(UL.searchByTitle("The").size(), UCC.searchByTitle("the").size());
 
         Book wall = new Book("The Death Cure", "James Dashner", "Action");
 
         UCC.addBook(wall);
 
         //UL has 2 results while UCC has 3 since Ul does not have the third book.
-        assertNotEquals(UL.searchByTitle("The").length, UCC.searchByTitle("the").length);
+        assertNotEquals(UL.searchByTitle("The").size(), UCC.searchByTitle("the").size());
 
     }
 }
