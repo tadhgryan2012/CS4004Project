@@ -163,9 +163,9 @@ public class LibraryTest {
 
         UL.addSub(subs);
         //No single department has subs, only UL as a whole, Duplicates not possible.
-        assertNotEquals(UL.getSubs(), CSIS.getBooks());
-        assertNotEquals(UL.getSubs(), Biology.getBooks());
-        assertNotEquals(UL.getSubs(), Science.getBooks());
+        assertNotEquals(books, CSIS.getBooks());
+        assertNotEquals(books, Biology.getBooks());
+        assertNotEquals(books, Science.getBooks());
         assertEquals(0, CSIS.getBooks().size());
 
     }
