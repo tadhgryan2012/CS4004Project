@@ -206,7 +206,6 @@ public class LibraryTest {
         Department CSIS = new Department(UL);
         User Tadhg = new User();
         User Breny = new User();
-        User Sophie = new User();
 
         Book book = new Book("Minecraft Handbook", "Notch", "Biblical");
         UL.addBook(book);
@@ -252,7 +251,7 @@ public class LibraryTest {
         LIT.addBook(book1);
         LIT.addBook(book2);
         LIT.addBook(book3);
-
+        
         assertEquals(book1, LIT.searchByTitle("Beast").get(0));
         assertEquals(new ArrayList<Book>(), LIT.searchByTitle("This will return an empty set"));
     }
