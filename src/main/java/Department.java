@@ -35,29 +35,10 @@ public class Department {
 		return true;
 	}
 	
-//	public Library getLibrary() {
-//		return library;
-//	}
 
 	public ArrayList<Loan> getHistoryOfBook(Book book) {
 		return book.getHistory();
 	}
-
-//	public HashMap<Book, Loan> getLoans() {
-//		return loans;
-//	}
-//
-//	public void setLoans(HashMap<Book, Loan> loans) {
-//		this.loans = loans;
-//	}
-//
-//	public ArrayList<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(ArrayList<User> users) {
-//		this.users = users;
-//	}
 
     public ArrayList<Book> getBooks() {
         return library.getBooks();

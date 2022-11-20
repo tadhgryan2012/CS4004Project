@@ -1,7 +1,13 @@
-public class User extends Person {
-
+public class User {
+	private static int idIdentifier;
+	private int id;
+	
 	public User() {
-		super();
+		this.id = idIdentifier++;
 	}
-
+	
+	@Override
+	public String toString() {
+		return String.format("%d", id);
+	}
 }

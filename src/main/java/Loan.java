@@ -3,7 +3,6 @@ import java.time.LocalDate;
 public class Loan {
 	private Book book;
 	private LocalDate dateOfLoan;
-	private LocalDate dateOfReturn;
 	private User user;
 	
 	
@@ -17,25 +16,9 @@ public class Loan {
 		return user;
 	}
 
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public Book getBook() {
-//		return book;
-//	}
-//
-//	public void setBook(Book book) {
-//		this.book = book;
-//	}
-//
 	public LocalDate getDateOfLoan() {
 		return dateOfLoan;
 	}
-//
-//	public void setDateOfLoan(LocalDate dateOfLoan) {
-//		this.dateOfLoan = dateOfLoan;
-//	}
 
 	@Override
 	public String toString() {

@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 
 public class Library {
-//	private ArrayList<Department> deps;
 	private ArrayList<Subscription> subs;
 	private ArrayList<Book> books;
 	private ArrayList<Library> agreements;
 
 
 	public Library() {
-//		deps = new ArrayList<>();
 		subs = new ArrayList<>();
 		agreements = new ArrayList<>();
 		books = new ArrayList<>();
@@ -17,9 +15,6 @@ public class Library {
 	public ArrayList<Book> getBooks() {
 		return books;
 	}
-//	public void setBooks(ArrayList<Book> books) {
-//		this.books = books;
-//	}
 	public void addBook(Book book) {
 		books.add(book);
 	}
@@ -27,12 +22,6 @@ public class Library {
 		return books.remove(book);
 	}
 
-//	public ArrayList<Library> getAgreements() {
-//		return agreements;
-//	}
-//	public void setAgreements(ArrayList<Library> agreements) {
-//		this.agreements = agreements;
-//	}
 	public void addAgreement(Library lib) {
 		agreements.add(lib);
 		lib.agreements.add(this);
@@ -55,22 +44,10 @@ public class Library {
 	public ArrayList<Subscription> getSubs() {
 		return subs;
 	}
-//	public void setSubs(ArrayList<Subscription> subs) {
-//		this.subs = subs;
-//	}
 	public void addSub(Subscription sub) {
 		subs.add(sub);
 	}
 
-//	public ArrayList<Department> getDeps() {
-//		return deps;
-//	}
-//	public void setDeps(ArrayList<Department> deps) {
-//		this.deps = deps;
-//	}
-//	public void addDepartment(Department dep) {
-//		deps.add(dep);
-//	}
 	public ArrayList<Book> searchByTitle(String title) {
 		ArrayList<Book> tempBooks = new ArrayList<>();
 		for (Book book : books) {
