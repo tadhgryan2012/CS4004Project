@@ -5,8 +5,6 @@ import java.util.HashMap;
 public class Department {
 	private Library library;
 	private HashMap<Book, Loan> loans;
-	private ArrayList<User> users;
-
 
 	/**
 	 * Makes a department using a Library object that the department is under
@@ -15,7 +13,6 @@ public class Department {
 	public Department(Library library) {
 		this.library = library;
 		loans = new HashMap<>();
-		users = new ArrayList<>();
 	}
 
 	/** 
