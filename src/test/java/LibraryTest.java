@@ -1,9 +1,7 @@
-package test;
-
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.*;
-import org.junit.jupiter.params.provider.*;
+//import org.junit.jupiter.params.*;
+//import org.junit.jupiter.params.provider.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,12 +9,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import main.Book;
-import main.Department;
-import main.Library;
-import main.Loan;
-import main.Subscription;
-import main.User;
+//import main.Book;
+//import main.Department;
+//import main.Library;
+//import main.Loan;
+//import main.Subscription;
+//import main.User;
 
 public class LibraryTest {
     /* Lack of traceability to previous borrowers when books, proceedings or journal
@@ -61,7 +59,7 @@ public class LibraryTest {
         books.add(book);
 
         UL.addBook(book);
-        UL.addAggreement(UCC);
+        UL.addAgreement(UCC);
         UCC.borrowBook(UL, book);
         assertEquals(books, UCC.getBooks());
     }
@@ -84,7 +82,7 @@ public class LibraryTest {
         Subscription sub = new Subscription("Netflix", books);
 
         UL.addSub(sub);
-        UL.addAggreement(UCC);
+        UL.addAgreement(UCC);
         UL.shareSub(UCC, sub);
         assertEquals(UL.getSubs(), UCC.getSubs());
     }
@@ -141,7 +139,7 @@ public class LibraryTest {
         UL.addBook(book1);
         UL.addBook(book2);
 
-        assertEquals(book, UL.searchTopic("Fiction").get(0));
+        assertEquals(book, UL.searchByTopic("Fiction").get(0));
     }
     
     /* Unnecessary subscription by several departments to expensive journals that are
@@ -163,7 +161,7 @@ public class LibraryTest {
 
         UL.addSub(subs);
         assertNotEquals(UL.getSubs (), UCC.getSubs());
-        UL.addAggreement(UCC);
+        UL.addAgreement(UCC);
         UL.shareSub(UCC, subs);
         assertEquals(UL.getSubs(), UCC.getSubs());
     }
@@ -200,4 +198,62 @@ public class LibraryTest {
      * proceedings being indexed in other UWON department libraries, or unavailable at
      * UWON.
      */
+
+    @Test
+    @DisplayName("Loan Tests")      // Tadhg
+    public void loanTest() {
+        Library UL = new Library();
+        Department CSIS = new Department(UL);
+        User Tadhg = new User();
+        User Breny = new User();
+        User Sophie = new User();
+
+        Book book = new Book("Minecraft Handbook", "Notch", "Biblical");
+        UL.addBook(book);
+
+        assertTrue(CSIS.loan(book, LocalDate.now(), Tadhg));
+        assertFalse(CSIS.loan(book, LocalDate.now(), Breny));
+        assertTrue(CSIS.returnLoan(book));
+        assertFalse(CSIS.returnLoan(book));
+        assertFalse(CSIS.loan(book, LocalDate.now(), Tadhg));
+    }
+
+    @Test
+    @DisplayName("Library Borrowing Tests")         // Tadhg
+    public void borrowingTest() {
+        Library DCU = new Library();
+        Library UCC = new Library();
+        Library NUIG = new Library();
+
+        Book book1 = new Book("Dictionary", "Willian Shakespear", "Humour");
+        Book book2 = new Book("Thesaurus", "Tadhg Ryan", "Homour");
+
+        UCC.addBook(book1);
+        NUIG.addBook(book2);
+        NUIG.addAgreement(UCC);
+        DCU.addAgreement(NUIG);
+
+        assertFalse(DCU.borrowBook(UCC, book1));
+        DCU.addAgreement(UCC);
+        assertTrue(DCU.borrowBook(UCC, book1));
+
+        assertFalse(NUIG.borrowBook(UCC, book1));
+
+        assertTrue(DCU.returnBook(UCC, book1));
+        assertFalse(DCU.returnBook(NUIG, book2));
+    }
+    @Test
+    @DisplayName("Search by Title Test")            // Tadhg
+    public void searchByTitleTest() {
+        Library LIT = new Library();
+        Book book1 = new Book("Beast Quest", "Adam Blake", "Fantasy");
+        Book book2 = new Book("Gardening 101", "Martha Stewart", "DIY");
+        Book book3 = new Book("100 Tips for Hoteliers", "Peter Venison", "Life Style");
+        LIT.addBook(book1);
+        LIT.addBook(book2);
+        LIT.addBook(book3);
+
+        assertEquals(book1, LIT.searchByTitle("Beast").get(0));
+        assertEquals(new ArrayList<Book>(), LIT.searchByTitle("This will return an empty set"));
+    }
 }
